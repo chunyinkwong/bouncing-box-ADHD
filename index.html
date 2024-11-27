@@ -7,10 +7,24 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="container">
-        <img id="dvd-logo" src="dvd-logo.png" alt="DVD Logo">
-    </div>
     <audio id="bounce-sound" src="bounce.mp3"></audio>
+    <div id="container">
+        <div id="sliders">
+            <div>
+                <label for="speedSlider">Speed:</label>
+                <input type="range" id="speedSlider" min="1" max="10" value="5">
+            </div>
+            <div>
+                <label for="radiusSlider">Radius:</label>
+                <input type="range" id="radiusSlider" min="1" max="20" value="10">
+            </div>
+            <div>
+                <label for="trailSlider">Trail:</label>
+                <input type="range" id="trailSlider" min="0" max="0.5" value="0.15" step="0.01">
+            </div>
+        </div>
+        <canvas id="animationCanvas" width="800" height="600"></canvas>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

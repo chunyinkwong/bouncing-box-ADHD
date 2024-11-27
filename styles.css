@@ -1,23 +1,35 @@
-/* styles.css */
-body, html {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    height: 100%;
+body {
+    height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background-color: black;
+    justify-content: center;
+    background-color: var(--background-color);
 }
 
 #container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#dvd-logo {
-    position: absolute;
-    width: 100px;
-    height: 50px;
+#sliders {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin-bottom: 20px;
+}
+
+#sliders div {
+    display: flex;
+    align-items: center;
+}
+
+#animationCanvas {
+    position: relative;
+    border: 1px solid #000;
+}
+
+#speedSlider, #radiusSlider, #trailSlider {
+    margin: 10px;
 }
