@@ -2,6 +2,7 @@ const container = document.getElementById('container');
 const canvas = document.getElementById('animationCanvas');
 const ctx = canvas.getContext('2d');
 const bounceSound = document.getElementById('bounce-sound');
+const patternButton = document.getElementById('patternButton');
 
 let x = Math.random() * (canvas.width - 20);
 let y = Math.random() * (canvas.height - 20);
@@ -17,7 +18,7 @@ speedSlider.addEventListener('input', (event) => {
     ballSpeed = event.target.value;
 });
 
-let ballRadius = 10;
+let ballRadius = 15;
 const radiusSlider = document.getElementById('radiusSlider');
 radiusSlider.addEventListener('input', (event) => {
     ballRadius = event.target.value;
@@ -71,10 +72,6 @@ function drawBall() {
 }
 
 function changeColor() {
-    // const r = Math.floor(Math.random() * 256);
-    // const g = Math.floor(Math.random() * 256);
-    // const b = Math.floor(Math.random() * 256);
-
     const h = Math.floor(Math.random() * 360); // Hue: 0-360
     const s = 100; // Saturation: 100%
     const l = 50; // Lightness: 50%
@@ -85,5 +82,15 @@ function playSound() {
     bounceSound.currentTime = 0;
     bounceSound.play();
 }
+
+function changePattern() {
+    // Generate random direction
+    const angle = Math.random() * 2 * Math.PI;
+    dx = Math.cos(angle);
+    dy = Math.sin(angle);
+    changeColor();
+}
+
+patternButton.addEventListener('click', changePattern);
 
 moveBall();

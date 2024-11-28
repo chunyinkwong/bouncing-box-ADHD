@@ -5,31 +5,62 @@ body {
     align-items: center;
     justify-content: center;
     background-color: var(--background-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 #container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #sliders {
     display: flex;
     justify-content: space-between;
-    width: 50%;
+    width: 100%;
+    max-width: 600px;
     margin-bottom: 20px;
 }
 
 #sliders div {
     display: flex;
     align-items: center;
+    margin: 0 10px;
+}
+
+#sliders label {
+    margin-right: 10px;
+    font-weight: bold;
 }
 
 #animationCanvas {
-    position: relative;
-    border: 1px solid #000;
+    border: 2px solid #000;
+    border-radius: 10px;
 }
 
 #speedSlider, #radiusSlider, #trailSlider {
     margin: 10px;
+    width: 100%;
+}
+
+#patternButton {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#patternButton:hover {
+    background-color: #0056b3;
 }
