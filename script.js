@@ -34,7 +34,7 @@ speedSlider.addEventListener('input', (event) => {
 
 const radiusSlider = document.getElementById('radiusSlider');
 radiusSlider.addEventListener('input', (event) => {
-    balls.forEach(ball => ball.ballRadius = event.target.value);
+    balls.forEach(ball => ball.ballRadius = Number(event.target.value));
 });
 
 const trailSlider = document.getElementById('trailSlider');
@@ -88,7 +88,6 @@ function moveBalls() {
             changeColor(ball);
             playSound();
         }
-
         drawBall(ball);
     });
 
