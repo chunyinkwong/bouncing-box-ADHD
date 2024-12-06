@@ -23,7 +23,12 @@
                 <input type="range" id="trailSlider" min="0" max="0.5" value="0.15" step="0.01">
             </div>
         </div>
-        <button id="patternButton">Change Pattern</button>
+        <div id="buttons">
+            <button id="patternButton" class="btn">Change Pattern</button>
+            <button id="spawnBallButton" class="btn">Spawn New Ball</button>
+            <!-- <button id="changeColor" class="btn">Change Color</button> -->
+            <button id="muteButton" class="btn">Toggle Sound</button>
+        </div>
         <canvas id="animationCanvas" width="809" height="601"></canvas>
     </div>
     <script src="script.js"></script>

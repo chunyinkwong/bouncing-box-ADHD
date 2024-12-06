@@ -3,32 +3,40 @@ const canvas = document.getElementById('animationCanvas');
 const ctx = canvas.getContext('2d');
 const bounceSound = document.getElementById('bounce-sound');
 const patternButton = document.getElementById('patternButton');
+const spawnBallButton = document.getElementById('spawnBallButton');
+const muteButton = document.getElementById('muteButton');
 
-let x = Math.random() * (canvas.width - 20);
-let y = Math.random() * (canvas.height - 20);
-let canvasBackgroundColor = 'rgba(255, 255, 255, 0.15)';
+let balls = [];
+let trailAmount = 0.15
+let isMuted = true;
+bounceSound.muted = true;
 
-let dx = 2;
-let dy = 2;
-let ballColor = "red";
+function createBall() {
+    let ball = {
+        x: Math.random() * (canvas.width - 20),
+        y: Math.random() * (canvas.height - 20),
+        dx: 2,
+        dy: 2,
+        ballColor: "red",
+        ballSpeed: 5,
+        ballRadius: 15
+    };
+    balls.push(ball);
+}
 
-let ballSpeed = 5;
 const speedSlider = document.getElementById('speedSlider');
 speedSlider.addEventListener('input', (event) => {
-    ballSpeed = event.target.value;
+    balls.forEach(ball => ball.ballSpeed = event.target.value);
 });
 
-let ballRadius = 15;
 const radiusSlider = document.getElementById('radiusSlider');
 radiusSlider.addEventListener('input', (event) => {
-    ballRadius = event.target.value;
+    balls.forEach(ball => ball.ballRadius = event.target.value);
 });
 
-let trailAmount = 0.15;
 const trailSlider = document.getElementById('trailSlider');
 trailSlider.addEventListener('input', (event) => {
     trailAmount = event.target.value;
-    console.log(trailAmount)
 });
 
 function getBackgroundFill() {
@@ -40,42 +48,45 @@ function getBackgroundFill() {
     }
 }
 
-function moveBall() {
+function moveBalls() {
     ctx.fillStyle = getBackgroundFill();
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    x += dx * ballSpeed;
-    y += dy * ballSpeed;
+    balls.forEach(ball => {
+        ball.x += ball.dx * ball.ballSpeed;
+        ball.y += ball.dy * ball.ballSpeed;
 
-    if (x + ballRadius >= canvas.width || x - ballRadius <= 0) {
-        dx *= -1;
-        changeColor();
-        playSound();
-    }
+        if (ball.x + ball.ballRadius >= canvas.width || ball.x - ball.ballRadius <= 0) {
+            ball.dx *= -1;
+            changeColor(ball);
+            playSound();
+        }
 
-    if (y + ballRadius >= canvas.height || y - ballRadius <= 0) {
-        dy *= -1;
-        changeColor();
-        playSound();
-    }
+        if (ball.y + ball.ballRadius >= canvas.height || ball.y - ball.ballRadius <= 0) {
+            ball.dy *= -1;
+            changeColor(ball);
+            playSound();
+        }
 
-    drawBall();
-    requestAnimationFrame(moveBall);
+        drawBall(ball);
+    });
+
+    requestAnimationFrame(moveBalls);
 }
 
-function drawBall() {
+function drawBall(ball) {
     ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-    ctx.fillStyle = ballColor;
+    ctx.arc(ball.x, ball.y, ball.ballRadius, 0, Math.PI * 2);
+    ctx.fillStyle = ball.ballColor;
     ctx.fill();
     ctx.closePath();
 }
 
-function changeColor() {
+function changeColor(ball) {
     const h = Math.floor(Math.random() * 360); // Hue: 0-360
     const s = 100; // Saturation: 100%
     const l = 50; // Lightness: 50%
-    ballColor = `hsl(${h}, ${s}%, ${l}%)`;
+    ball.ballColor = `hsl(${h}, ${s}%, ${l}%)`;
 }
 
 function playSound() {
@@ -84,13 +95,20 @@ function playSound() {
 }
 
 function changePattern() {
-    // Generate random direction
-    const angle = Math.random() * 2 * Math.PI;
-    dx = Math.cos(angle);
-    dy = Math.sin(angle);
-    changeColor();
+    balls.forEach(ball => {
+        const angle = Math.random() * 2 * Math.PI;
+        ball.dx = Math.cos(angle);
+        ball.dy = Math.sin(angle);
+        changeColor(ball);
+    });
 }
 
 patternButton.addEventListener('click', changePattern);
+spawnBallButton.addEventListener('click', createBall);
+muteButton.addEventListener('click', () => {
+    isMuted = !isMuted;
+    bounceSound.muted = isMuted;
+});
 
-moveBall();
+createBall(); // Create the initial ball
+moveBalls();
