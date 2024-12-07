@@ -25,9 +25,13 @@
         </div>
         <div id="buttons">
             <button id="patternButton" class="btn">Change Direction</button>
-            <button id="spawnBallButton" class="btn">Spawn New Ball</button>
             <button id="togglePatternButton" class="btn">Change Pattern</button>
             <button id="muteButton" class="btn">Toggle Sound</button>
+        </div>
+        <div id="ballCounterContainer">
+            <button id="decreaseBallButton" class="btn">-</button>
+            <input id="ballCounter" type="number" value="1" min="0" max="99" class="btn">
+            <button id="increaseBallButton" class="btn">+</button>
         </div>
         <canvas id="animationCanvas" width="809" height="601"></canvas>
     </div>

@@ -26,12 +26,14 @@ body {
     width: 100%;
     max-width: 600px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 #sliders div {
     display: flex;
     align-items: center;
     margin: 0 10px;
+    margin-top: 20px;
 }
 
 #sliders label {
@@ -59,6 +61,29 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+#ballCounter {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Hide the spinner controls for the number input */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    appearance: textfield;
 }
 
 .btn:hover {
